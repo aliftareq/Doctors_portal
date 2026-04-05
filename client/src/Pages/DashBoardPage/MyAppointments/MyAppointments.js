@@ -12,7 +12,7 @@ const MyAppointments = () => {
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://doctors-portal-server-lyart-eight.vercel.app/bookings?email=${user?.email}`,
+        `https://doctors-portal-ruby.vercel.app/bookings?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("patient-token")}`,

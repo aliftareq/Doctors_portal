@@ -64,9 +64,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://doctors-portal-server-lyart-eight.vercel.app/booking/${params.id}`,
-          ),
+          fetch(`https://doctors-portal-ruby.vercel.app/booking/${params.id}`),
         element: <Payment></Payment>,
       },
       {

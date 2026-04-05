@@ -19,17 +19,14 @@ const CheckOutForm = ({ booking }) => {
   useEffect(() => {
     if (!price) return;
 
-    fetch(
-      "https://doctors-portal-server-lyart-eight.vercel.app/create-payment-intent",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("patient-token")}`,
-        },
-        body: JSON.stringify({ price }),
+    fetch("https://doctors-portal-ruby.vercel.app/create-payment-intent", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("patient-token")}`,
       },
-    )
+      body: JSON.stringify({ price }),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data?.clientSecret) {
@@ -109,7 +106,7 @@ const CheckOutForm = ({ booking }) => {
         };
 
         const res = await fetch(
-          "https://doctors-portal-server-lyart-eight.vercel.app/payments",
+          "https://doctors-portal-ruby.vercel.app/payments",
           {
             method: "POST",
             headers: {
