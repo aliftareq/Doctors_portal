@@ -11,6 +11,7 @@ import MyAppointments from "../../Pages/DashBoardPage/MyAppointments/MyAppointme
 import Payment from "../../Pages/DashBoardPage/Payment/Payment";
 import Home from "../../Pages/HomePage/Home/Home";
 import About from "../../Pages/AboutPage/About.jsx";
+import Profile from "../../Pages/Profile/Profile";
 import ErrorPage from "../../Pages/Shared/ErrorPage/ErrorPage";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

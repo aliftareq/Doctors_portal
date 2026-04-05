@@ -1,38 +1,72 @@
-import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { AuthContext } from '../Contexts/AuthProvider';
-import useAdmin from '../Hooks/useAdmin';
-import NavBar from '../Pages/Shared/NavBar/NavBar';
+import React, { useContext } from "react";
+import { NavLink, Outlet } from "react-router-dom";
+import { AuthContext } from "../Contexts/AuthProvider";
+import useAdmin from "../Hooks/useAdmin";
+import NavBar from "../Pages/Shared/NavBar/NavBar";
 
 const DashBoardLayout = () => {
-    const { user } = useContext(AuthContext)
-    const [isAdmin] = useAdmin(user?.email)
-    return (
-        <div>
-            <NavBar></NavBar>
-            <div className="drawer drawer-mobile">
-                <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    <Outlet></Outlet>
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-64 bg-base-100 lg:bg-transparent text-base-content">
-                        {/* <!-- Sidebar content here --> */}
-                        <li><Link to='/dashboard'>My Appointments</Link></li>
-                        {
-                            isAdmin &&
-                            <>
-                                <li><Link to='/dashboard/users'>All Users</Link></li>
-                                <li><Link to='/dashboard/add-doctor'>Add Doctor</Link></li>
-                                <li><Link to='/dashboard/manage-doctors'>Manage Doctors</Link></li>
-                            </>
-                        }
-                    </ul>
-                </div>
-            </div>
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+
+  const navLinkClass = ({ isActive }) =>
+    `block w-full rounded-lg px-5 py-4 text-left font-semibold uppercase tracking-wide transition-all duration-200 ${
+      isActive
+        ? "bg-[#3A4256] text-white"
+        : "bg-[#3A4256] text-white hover:bg-[#2f3647]"
+    }`;
+
+  return (
+    <div>
+      <NavBar />
+
+      <div className="drawer drawer-mobile">
+        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+
+        <div className="drawer-content p-4">
+          <Outlet />
         </div>
-    );
+
+        <div className="drawer-side">
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+
+          <div className="w-72 min-h-full bg-base-100 lg:bg-transparent p-4">
+            <ul className="space-y-3">
+              <li>
+                <NavLink to="/dashboard" className={navLinkClass}>
+                  My Appointments
+                </NavLink>
+              </li>
+
+              {isAdmin && (
+                <>
+                  <li>
+                    <NavLink to="/dashboard/users" className={navLinkClass}>
+                      All Users
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink to="/dashboard/add-doctor" className={navLinkClass}>
+                      Add Doctor
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink
+                      to="/dashboard/manage-doctors"
+                      className={navLinkClass}
+                    >
+                      Manage Doctors
+                    </NavLink>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DashBoardLayout;

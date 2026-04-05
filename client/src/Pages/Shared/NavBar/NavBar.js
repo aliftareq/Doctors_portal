@@ -32,11 +32,19 @@ const NavBar = () => {
       {user?.uid ? (
         <>
           <li>
-            <Link to="/dashboard">DashBoard</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link to="/">
-              {user?.displayName ? user?.displayName : "Annonymous"}
+            <Link to="/profile">
+              <img
+                src={
+                  user?.photoURL ||
+                  "https://i.ibb.co/2kR7dQH/default-avatar.png"
+                }
+                alt="user"
+                title={user?.displayName || "Anonymous"}
+                className="w-10 h-10 rounded-full border-2 border-primary object-cover cursor-pointer"
+              />
             </Link>
           </li>
           <li onClick={handleLogOut}>
